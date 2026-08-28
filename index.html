@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Apoorva Upadhyaya</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #1a1a1a;
+      --ink-soft: #4a4a4a;
+      --ink-muted: #888;
+      --bg: #ffffff;
+      --bg-card: #f4f3ef;
+      --rule: #d8d6cf;
+      --accent: #3d5a80;
+      --accent-soft: #e8edf3;
+      --serif: 'EB Garamond', Georgia, serif;
+      --sans: 'Inter', system-ui, sans-serif;
+      --max: 720px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--bg);
+      border-bottom: 1px solid var(--rule);
+      display: flex; justify-content: center;
+    }
+    nav ul {
+      display: flex; gap: 0; list-style: none;
+      max-width: var(--max); width: 100%;
+    }
+    nav a {
+      display: block; padding: 14px 18px;
+      font-size: 12px; letter-spacing: .08em; text-transform: uppercase;
+      color: var(--ink-soft); text-decoration: none;
+      transition: color .2s;
+    }
+    nav a:hover { color: var(--accent); }
+
+    /* ── SECTIONS ── */
+    section {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 64px 24px;
+      border-bottom: 1px solid var(--rule);
+    }
+    section:last-of-type { border-bottom: none; }
+
+    /* ── HERO ── */
+    #home {
+      padding-top: 80px; padding-bottom: 80px;
+      display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: start;
+    }
+    .hero-name {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: -.01em;
+      margin-bottom: 6px;
+    }
+    .hero-name em {
+      font-style: italic;
+      color: var(--accent);
+    }
+    .hero-title {
+      font-size: 13px;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin-bottom: 20px;
+    }
+    .hero-bio {
+      font-size: 15.5px;
+      color: var(--ink-soft);
+      max-width: 540px;
+      line-height: 1.75;
+    }
+    .hero-links {
+      display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px;
+    }
+    .hero-links a {
+      font-size: 12px; letter-spacing: .06em; text-transform: uppercase;
+      color: var(--accent); text-decoration: none;
+      border: 1px solid var(--accent);
+      padding: 6px 14px; border-radius: 2px;
+      transition: background .2s, color .2s;
+    }
+    .hero-links a:hover {
+      background: var(--accent); color: #fff;
+    }
+    .avatar-wrap {
+      width: 110px; height: 110px; flex-shrink: 0;
+      border-radius: 50%;
+      background: var(--accent-soft);
+      border: 2px solid var(--rule);
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+    }
+    .avatar-initials {
+      font-family: var(--serif);
+      font-size: 2rem;
+      color: var(--accent);
+      font-style: italic;
+    }
+
+    /* ── SECTION HEADINGS ── */
+    .section-label {
+      font-size: 11px; letter-spacing: .12em; text-transform: uppercase;
+      color: var(--ink-muted);
+      margin-bottom: 28px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .section-label::after {
+      content: ''; flex: 1; height: 1px; background: var(--rule);
+    }
+
+    /* ── INTERESTS ── */
+    .interests-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 12px;
+    }
+    .interest-tag {
+      background: var(--accent-soft);
+      border-left: 3px solid var(--accent);
+      padding: 10px 14px;
+      font-size: 13.5px;
+      color: var(--ink);
+    }
+
+    /* ── NEWS ── */
+    .news-list { list-style: none; }
+    .news-list li {
+      display: grid; grid-template-columns: 56px 1fr;
+      gap: 16px; padding: 14px 0;
+      border-bottom: 1px solid var(--rule);
+      align-items: start;
+    }
+    .news-list li:last-child { border-bottom: none; }
+    .news-year {
+      font-size: 12px; color: var(--ink-muted);
+      font-variant-numeric: tabular-nums;
+      padding-top: 2px;
+    }
+    .news-text { font-size: 14px; color: var(--ink-soft); line-height: 1.55; }
+    .news-text strong { color: var(--ink); font-weight: 500; }
+
+    /* ── PUBLICATIONS ── */
+    .pub-list { list-style: none; }
+    .pub-item {
+      padding: 18px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    .pub-item:last-child { border-bottom: none; }
+    .pub-title {
+      font-family: var(--serif);
+      font-size: 16.5px;
+      color: var(--ink);
+      line-height: 1.4;
+      margin-bottom: 4px;
+    }
+    .pub-authors {
+      font-size: 13px; color: var(--ink-muted); margin-bottom: 4px;
+    }
+    .pub-authors strong { color: var(--ink-soft); font-weight: 500; }
+    .pub-venue {
+      font-size: 12.5px;
+      color: var(--accent);
+      letter-spacing: .03em;
+    }
+    .pub-badge {
+      display: inline-block;
+      font-size: 10.5px; letter-spacing: .05em;
+      background: var(--accent-soft);
+      color: var(--accent);
+      border-radius: 2px;
+      padding: 2px 7px;
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+
+    /* ── EXPERIENCE ── */
+    .exp-list { list-style: none; }
+    .exp-item {
+      display: grid; grid-template-columns: 100px 1fr;
+      gap: 16px; padding: 16px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    .exp-item:last-child { border-bottom: none; }
+    .exp-period { font-size: 12px; color: var(--ink-muted); padding-top: 3px; }
+    .exp-role { font-weight: 500; font-size: 14.5px; color: var(--ink); }
+    .exp-place { font-size: 13px; color: var(--ink-soft); margin-top: 2px; }
+    .exp-desc { font-size: 13px; color: var(--ink-muted); margin-top: 4px; line-height: 1.5; }
+
+    /* ── SERVICE & TEACHING ── */
+    .service-group { margin-bottom: 36px; }
+    .service-group:last-child { margin-bottom: 0; }
+    .service-group-title {
+      font-size: 11px; letter-spacing: .09em; text-transform: uppercase;
+      color: var(--ink-soft); font-weight: 500;
+      margin-bottom: 14px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--rule);
+    }
+    .service-list { list-style: none; }
+    .service-list li {
+      display: grid; grid-template-columns: 56px 1fr;
+      gap: 14px; padding: 9px 0;
+      border-bottom: 1px dashed var(--rule);
+      align-items: start;
+      font-size: 13.5px;
+    }
+    .service-list li:last-child { border-bottom: none; }
+    .service-year { font-size: 12px; color: var(--ink-muted); padding-top: 1px; }
+    .service-desc { color: var(--ink-soft); line-height: 1.5; }
+    .service-desc strong { color: var(--ink); font-weight: 500; }
+
+    /* ── CONTACT ── */
+    #contact { padding-bottom: 80px; }
+    .contact-block {
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .contact-row {
+      display: flex; gap: 12px; align-items: baseline;
+    }
+    .contact-key {
+      font-size: 11px; letter-spacing: .08em; text-transform: uppercase;
+      color: var(--ink-muted); width: 80px; flex-shrink: 0;
+    }
+    .contact-val { font-size: 14.5px; color: var(--ink); }
+    .contact-val a { color: var(--accent); text-decoration: none; }
+    .contact-val a:hover { text-decoration: underline; }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 24px;
+      font-size: 12px;
+      color: var(--ink-muted);
+      border-top: 1px solid var(--rule);
+    }
+
+    @media (max-width: 540px) {
+      #home { grid-template-columns: 1fr; }
+      .avatar-wrap { display: none; }
+      .exp-item { grid-template-columns: 1fr; }
+      .exp-period { padding-top: 0; }
+      .service-list li { grid-template-columns: 1fr; }
+      .service-year { padding-top: 0; }
+      nav a { padding: 12px 10px; font-size: 11px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <ul>
+    <li><a href="#home">Home</a></li>
+    <li><a href="#interests">Research</a></li>
+    <li><a href="#news">News</a></li>
+    <li><a href="#publications">Publications</a></li>
+    <li><a href="#service">Service & Teaching</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <div>
+    <p class="hero-title">Postdoctoral Researcher · L3S Research Center, Leibniz University Hannover</p>
+    <h1 class="hero-name">Apoorva Upadhyaya</h1>
+    <p class="hero-bio">
+      I am a postdoctoral researcher at the L3S Research Center working within the EU Horizon
+      <a href="#" style="color:var(--accent);text-decoration:none;">RECITALS</a> project.
+      My research sits at the intersection of <strong>mechanistic interpretability</strong>,
+      <strong>LLM safety &amp; alignment</strong>, and <strong>multilingual NLP</strong>,
+      with applications to social media, computational social science, zero-shot reasoning, and ethical content analysis.
+      I completed my PhD in April 2026 under Prof. Wolfgang Nejdl,
+      receiving a <em>Magna cum laude</em> distinction.
+    </p>
+    <div class="hero-links">
+      <a href="mailto:upadhyaya@l3s.de">Email</a>
+      <a href="https://scholar.google.com/citations?user=kRwvOfUAAAAJ&hl=en" target="_blank">Google Scholar</a>
+      <a href="https://www.linkedin.com/in/apoorva-upadhyaya-46950118b/" target="_blank">LinkedIn</a>
+      <a href="CV_ApoorvaUpadhyaya.pdf" target="_blank">CV</a>
+    </div>
+  </div>
+  <div class="avatar-wrap">
+      <img src="photo.jpeg" alt="Apoorva Upadhyaya" style="width:100%;height:100%;object-fit:cover;" />
+  </div>
+</section>
+
+<!-- RESEARCH INTERESTS -->
+<section id="interests">
+  <p class="section-label">Research Interests</p>
+  <div class="interests-grid">
+    <div class="interest-tag">Mechanistic Interpretability</div>
+    <div class="interest-tag">LLM Safety &amp; Alignment</div>
+    <div class="interest-tag">Multilingual NLP</div>
+    <div class="interest-tag">Computational Social Science</div>
+    <div class="interest-tag">Federated Learning</div>
+    <div class="interest-tag">Social Media NLP</div>
+    <div class="interest-tag">Stance &amp; Sentiment Detection</div>
+    <div class="interest-tag">Healthcare AI</div>
+  </div>
+</section>
+
+<!-- NEWS -->
+<section id="news">
+  <p class="section-label">Recent News</p>
+  <ul class="news-list">
+    <li>
+      <span class="news-year">2026</span>
+      <span class="news-text">Papers accepted to <strong>WAFL@ECML PKDD 2026</strong>: <em>Which Layers Matter? A Study of Layer-Selective LoRA in Centralized and Federated Fine-Tuning</em> and <em>MTL-FLoRA: Federated Low-Rank Adaptation for Multi-Task Learning</em>.</span>
+    </li>
+    <li>
+      <span class="news-year">2026</span>
+      <span class="news-text">EU-Project research visit to <strong>IIT Kharagpur</strong>, India, under <a href="https://scholar.google.com/citations?user=hCbFmUUAAAAJ&hl=en" target="_blank" style="color:var(--accent);">Prof. Niloy Ganguly</a>.</span>
+    </li>
+    <li>
+      <span class="news-year">2026</span>
+      <span class="news-text">Paper submitted to <strong>ACL ARR August 2026</strong>: <em>A Mechanistic Analysis of Safety-Language in LLMs</em>.</span>
+    </li>
+    <li>
+      <span class="news-year">2026</span>
+      <span class="news-text">Paper submitted to <strong>EMNLP 2026</strong> (with Sapienza University, Rome): <em>Culture-Wiki: Benchmarking Different Cultures in Knowledge Recalling Tasks</em>.</span>
+    </li>
+    <li>
+      <span class="news-year">2026</span>
+      <span class="news-text">Research talk at <strong>AAAI Conference on Web and Social Media (ICWSM) 2026</strong>, Los Angeles, for accepted paper on transparent and interpretable stance detection.</span>
+    </li>
+    <li>
+      <span class="news-year">2026</span>
+      <span class="news-text">Awarded <strong>Magna cum laude</strong> for PhD thesis defense at Leibniz University Hannover.</span>
+    </li>
+    <li>
+      <span class="news-year">2025</span>
+      <span class="news-text">Paper accepted at <strong>IJCAI 2025</strong> (CORE A*): <em>Enhancing Online Climate Discourse: A Two-Stage Framework for Climate Content Categorization and Moderation</em>. Presented in Montreal, Canada.</span>
+    </li>
+    <li>
+      <span class="news-year">2025</span>
+      <span class="news-text">Research visit to <strong>Sapienza University of Rome</strong>, Italy, under <a href="https://scholar.google.com/citations?user=BsgVJ-EAAAAJ&hl=en" target="_blank" style="color:var(--accent);">Prof. Roberto Navigli</a>.</span>
+    </li>
+  </ul>
+</section>
+
+<!-- PUBLICATIONS -->
+<section id="publications">
+  <p class="section-label">Selected Publications</p>
+  <ul class="pub-list">
+
+    <li class="pub-item">
+      <p class="pub-title">A Mechanistic Analysis of Safety-Language in LLMs</p>
+      <p class="pub-venue">Submitted to ACL ARR August 2026 <span class="pub-badge">Under Review</span></p>
+    </li>
+
+    <li class="pub-item">
+      <p class="pub-title">Culture-Wiki: Benchmarking Different Cultures in Knowledge Recalling Tasks</p>
+      <p class="pub-authors">Moroni, L., et al. (Sapienza &amp; L3S)</p>
+      <p class="pub-venue">Submitted to EMNLP 2026 <span class="pub-badge">Under Review</span></p>
+    </li>
+    
+    <li class="pub-item">
+      <p class="pub-title">Towards Transparent Stance Detection: A Zero-Shot Approach Using Implicit and Explicit Interpretability</p>
+      <p class="pub-authors"><strong>Upadhyaya, A.</strong>, Nejdl, W., &amp; Fisichella, M.</p>
+      <p class="pub-venue">AAAI Conference on Web and Social Media (ICWSM) 2026 <span class="pub-badge">CORE A</span></p>
+    </li>
+    <li class="pub-item">
+      <p class="pub-title">Which Layers Matter? A Study of Layer-Selective LoRA in Centralized and Federated Fine-Tuning</p>
+      <p class="pub-authors">Murashilli, V. V., Khatri, K. K., <strong>Upadhyaya, A.</strong>, &amp; Fisichella, M.</p>
+      <p class="pub-venue">ECML PKDD 2026 Workshop <span class="pub-badge">To appear</span></p>
+    </li>
+
+    <li class="pub-item">
+      <p class="pub-title">MTL-FLoRA: Federated Low-Rank Adaptation for Multi-Task Learning</p>
+      <p class="pub-authors">Heitbreder, J., Jesinghaus, C., Köpp, J., <strong>Upadhyaya, A.</strong>, &amp; Fisichella, M.</p>
+      <p class="pub-venue">ECML PKDD 2026 Workshop <span class="pub-badge">To appear</span></p>
+    </li>
+
+    <li class="pub-item">
+      <p class="pub-title">Exploring How Students Interact with AI for Detecting Moral Sentiments in Social Media</p>
+      <p class="pub-authors"><strong>Upadhyaya, A.</strong>, Schicchi, D., Taibi, D., &amp; Fisichella, M.</p>
+      <p class="pub-venue">Array, Vol. 30, Elsevier, 2026 &nbsp;·&nbsp; IF 5.3 <span class="pub-badge">Q1</span></p>
+    </li>
+    <li class="pub-item">
+      <p class="pub-title">Enhancing Online Climate Discourse: A Two-Stage Framework for Climate Content Categorization and Moderation</p>
+      <p class="pub-authors"><strong>Upadhyaya, A.</strong>, Nejdl, W., &amp; Fisichella, M.</p>
+      <p class="pub-venue">IJCAI 2025 <span class="pub-badge">CORE A*</span></p>
+    </li>
+
+    <li class="pub-item">
+      <p class="pub-title">Interpretable Zero-Shot Stance Detection with Proactive Content Intervention</p>
+      <p class="pub-authors"><strong>Upadhyaya, A.</strong>, Nejdl, W., &amp; Fisichella, M.</p>
+      <p class="pub-venue">Information Processing &amp; Management, 2025 &nbsp;·&nbsp; IF 8.1 <span class="pub-badge">Q1</span></p>
+    </li>
+
+    <li class="pub-item">
+      <p class="pub-title">Catalog: Exploiting Joint Temporal Dependencies for Enhanced Phishing Detection on Ethereum</p>
+      <p class="pub-authors">Ghosh, M., Srivastava, S., <strong>Upadhyaya, A.</strong>, Halder, R., &amp; Chandra, J.</p>
+      <p class="pub-venue">ACM The Web Conference 2025 <span class="pub-badge">CORE A*</span></p>
+    </li>
+
+    <li class="pub-item">
+      <p class="pub-title">Harnessing Empathy and Ethics for Relevance Detection and Information Categorization in Climate and COVID-19 Tweets</p>
+      <p class="pub-authors"><strong>Upadhyaya, A.</strong>, Nejdl, W., &amp; Fisichella, M.</p>
+      <p class="pub-venue">CIKM 2024 <span class="pub-badge">CORE A</span></p>
+    </li>
+
+    <li class="pub-item">
+      <p class="pub-title">Toxicity, Morality, and Speech Act Guided Stance Detection</p>
+      <p class="pub-authors"><strong>Upadhyaya, A.</strong>, Fisichella, M., &amp; Nejdl, W.</p>
+      <p class="pub-venue">EMNLP 2023 Findings <span class="pub-badge">CORE A</span></p>
+    </li>
+
+    <li class="pub-item">
+      <p class="pub-title">A Multi-Task Model for Emotion and Offensive Aided Stance Detection of Climate Change Tweets</p>
+      <p class="pub-authors"><strong>Upadhyaya, A.</strong>, Fisichella, M., &amp; Nejdl, W.</p>
+      <p class="pub-venue">ACM The Web Conference 2023 <span class="pub-badge">CORE A*</span></p>
+    </li>
+
+    <li class="pub-item">
+      <p class="pub-title">Intensity-Valued Emotions Help Stance Detection of Climate Change Twitter Data</p>
+      <p class="pub-authors"><strong>Upadhyaya, A.</strong>, Fisichella, M., &amp; Nejdl, W.</p>
+      <p class="pub-venue">IJCAI 2023 <span class="pub-badge">CORE A*</span></p>
+    </li>
+
+  </ul>
+  <p style="margin-top:20px; font-size:13px; color:var(--ink-muted);">
+    Full list on <a href="https://scholar.google.com/citations?user=kRwvOfUAAAAJ&hl=en" target="_blank" style="color:var(--accent);">Google Scholar</a> &nbsp;·&nbsp; h-index 10, 320+ citations
+  </p>
+</section>
+
+<!-- SERVICE & TEACHING -->
+<section id="service">
+  <p class="section-label">Service &amp; Teaching</p>
+
+  <div class="service-group">
+    <p class="service-group-title">Grants &amp; Proposal Writing</p>
+    <ul class="service-list">
+      <li>
+        <span class="service-year">2021–</span>
+        <span class="service-desc">Contributor to <strong>EU Horizon RECITALS</strong> project and ongoing work packages of federated insider threat detection and LLM explainability components.</span>
+      </li>
+      <li>
+        <span class="service-year"></span>
+        <span class="service-desc">Experience contributing to <strong>DFG</strong> and EU project proposal writing; involved in leading and presenting work packages at EU plenary meetings.</span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="service-group">
+    <p class="service-group-title">Program Committees &amp; Reviewing</p>
+    <ul class="service-list">
+      <li>
+        <span class="service-year">2026</span>
+        <span class="service-desc">Program Committee, <strong>WAFL Workshop, ECML PKDD 2026</strong></span>
+      </li>
+      <li>
+        <span class="service-year">2026</span>
+        <span class="service-desc">Program Committee, Demo Track, <strong>ECIR 2026</strong></span>
+      </li>
+      <li>
+        <span class="service-year">2025</span>
+        <span class="service-desc">Program Committee &amp; Session Moderator, Workshop on Generative AI for Disinformation and Misinformation Detection, <strong>WSDM 2025</strong></span>
+      </li>
+      <li>
+        <span class="service-year">2023</span>
+        <span class="service-desc">Program Committee, Workshop on High-Performance AI in Education, <strong>AIxIA 2023</strong></span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="service-group">
+    <p class="service-group-title">Teaching</p>
+    <ul class="service-list">
+      <li>
+        <span class="service-year">2026</span>
+        <span class="service-desc">Teaching Assistant &amp; Course Coordinator, <strong>AI in Healthcare</strong> with mentoring student research teams, Leibniz University Hannover</span>
+      </li>
+      <li>
+        <span class="service-year">2025–26</span>
+        <span class="service-desc">Teaching Assistant, <strong>Federated Learning</strong> (Winter Semester 2025/26), Leibniz University Hannover</span>
+      </li>
+      <li>
+        <span class="service-year">2025</span>
+        <span class="service-desc">Teaching Assistant, <strong>AI Seminar</strong> (Summer Semester 2025), Leibniz University Hannover</span>
+      </li>
+      <li>
+        <span class="service-year">2024–25</span>
+        <span class="service-desc">Teaching Assistant, <strong>Federated Learning</strong> (Winter Semester 2024/25), Leibniz University Hannover</span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="service-group">
+    <p class="service-group-title">Mentoring &amp; Supervision</p>
+    <ul class="service-list">
+      <li>
+        <span class="service-year">2024–26</span>
+        <span class="service-desc">Supervised Bachelor's theses: <em>Federated Learning of LLMs on Agricultural Drone Imagery Using Simulated Flight Planning</em> and <em>Exploring ChatGPT for Drone Applications: Prompts, Dialogues, and Task Adaptability</em>.</span>
+      </li>
+      <li>
+        <span class="service-year">2022–23</span>
+        <span class="service-desc">Pilot studies with secondary school students at <strong>IGS List, Hannover</strong> (AI &amp; climate change viewpoints) and <strong>Italian secondary school</strong> (AI for moral sentiment detection in social media).</span>
+      </li>
+    </ul>
+  </div>
+
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <p class="section-label">Experience &amp; Education</p>
+  <ul class="exp-list">
+
+    <li class="exp-item">
+      <span class="exp-period">2026 – present</span>
+      <div>
+        <p class="exp-role">Postdoctoral Researcher</p>
+        <p class="exp-place">L3S Research Center, Leibniz University Hannover · EU Horizon RECITALS Project</p>
+        <p class="exp-desc">LLM safety alignment, multilingual NLP, computational social science, federated learning.</p>
+      </div>
+    </li>
+
+    <li class="exp-item">
+      <span class="exp-period">2023 – 2026</span>
+      <div>
+        <p class="exp-role">PhD in Computer Science <em style="font-weight:400;color:var(--ink-muted)">(Magna cum laude)</em></p>
+        <p class="exp-place">Leibniz University Hannover · Advisor: Prof. Wolfgang Nejdl</p>
+        <p class="exp-desc">Stance detection, interpretable NLP, social media analysis, climate and COVID-19 discourse.</p>
+      </div>
+    </li>
+
+    <li class="exp-item">
+      <span class="exp-period">2021 – 2026</span>
+      <div>
+        <p class="exp-role">Researcher (TV-L 13)</p>
+        <p class="exp-place">L3S Research Center, Hannover</p>
+      </div>
+    </li>
+
+    <li class="exp-item">
+      <span class="exp-period">2020 – 2021</span>
+      <div>
+        <p class="exp-role">Researcher, Genomics Labs</p>
+        <p class="exp-place">Life Science &amp; Health Care R&amp;I Lab, Tata Consultancy Services</p>
+      </div>
+    </li>
+
+    <li class="exp-item">
+      <span class="exp-period">2018 – 2020</span>
+      <div>
+        <p class="exp-role">M.Tech, Computer Science &amp; Engineering</p>
+        <p class="exp-place">IIT Patna &nbsp;·&nbsp; CGPA 9.1 (2nd in department) · GATE 99.93 percentile</p>
+      </div>
+    </li>
+
+    <li class="exp-item">
+      <span class="exp-period">2014 – 2018</span>
+      <div>
+        <p class="exp-role">System Engineer</p>
+        <p class="exp-place">Tata Consultancy Services</p>
+      </div>
+    </li>
+
+  </ul>
+</section>
+
+
+<!-- CONTACT -->
+<section id="contact">
+  <p class="section-label">Contact</p>
+  <div class="contact-block">
+    <div class="contact-row">
+      <span class="contact-key">Email</span>
+      <span class="contact-val"><a href="mailto:upadhyaya@l3s.de">upadhyaya@l3s.de</a></span>
+    </div>
+    <div class="contact-row">
+      <span class="contact-key">Position</span>
+      <span class="contact-val">Postdoctoral Researcher, L3S Research Center</span>
+    </div>
+    <div class="contact-row">
+      <span class="contact-key">Location</span>
+      <span class="contact-val">Hannover, Germany</span>
+    </div>
+    <div class="contact-row">
+      <span class="contact-key">Scholar</span>
+      <span class="contact-val"><a href="https://scholar.google.com/citations?user=kRwvOfUAAAAJ&hl=en" target="_blank">Google Scholar ↗</a></span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Apoorva Upadhyaya · L3S Research Center, Leibniz University Hannover
+</footer>
+
+</body>
+</html>
